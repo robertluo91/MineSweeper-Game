@@ -1,109 +1,79 @@
 package minesweeper.server;
 
-import java.net.*;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import minesweeper.BoardSquare.Board;
+
+/**
+ * 
+ * MinesweeperServer is thread safe. 
+ * The threads in the system are:
+ * 1. main thread accepting new connection.
+ * 2. one thread (MinesweeperSeverThread) per connected client, handling that client only.
+ * 
+ * The serverSocket object is confined to the main thread. 
+ * The Socket object for a client is confined to the client's thread;
+ * the main thread loses its reference to the object right after starting the client thread.
+ * 
+ * All fields are private without representation exposure.
+ * The references to 'board' and 'debug' are locked by "private final" condition
+ * The mutable numPlayers is mutated via synchronized methods to shield race conditions
+ *
+ */
 
 public class MinesweeperServer {
-    private final ServerSocket serverSocket;
-    /** True if the server should _not_ disconnect a client after a BOOM message. */
+	
+    private ServerSocket serverSocket;
+    private int numPlayers;
+    private final Board board;
+    /** False if the serve needs to disconnect a client after a BOOM message. */
     private final boolean debug;
 
     /**
-     * Make a MinesweeperServer that listens for connections on port.
+     * Make a MinesweeperServer which listens for connections on port.
      * @param port port number, requires 0 <= port <= 65535.
      */
-    public MinesweeperServer(int port, boolean debug) throws IOException {
+    public MinesweeperServer(int port, boolean debug, Board board) throws IOException {
         serverSocket = new ServerSocket(port);
         this.debug = debug;
+        this.numPlayers = 0; 
+        this.board = board;
     }
+    
+    public synchronized void increaseNumPlayers(){
+        this.numPlayers++;
+    }
+    
+    public synchronized void decreaseNumPlayers(){
+        this.numPlayers--;
+    }
+    
+    public synchronized int getNumPlayers() {
+        return numPlayers;
+    } 
 
     /**
      * Run the server, listening for client connections and handling them.  
      * Never returns unless an exception is thrown.
-     * @throws IOException if the main server socket is broken
+     * @throws IOException if the main server socket is not working
      * (IOExceptions from individual clients do *not* terminate serve()).
      */
     public void serve() throws IOException {
         while (true) {
             // block until a client connects
             Socket socket = serverSocket.accept();
-
-            // handle the client
-            try {
-                handleConnection(socket);
-            } catch (IOException e) {
-                e.printStackTrace(); // but don't terminate serve()
-            } finally {
-                socket.close();
-            }
+            //see MinesweeperSeverThread.java for methods handling clients
+            MinesweeperServerThread thread1 = new MinesweeperServerThread(this,socket, board, debug);
+            thread1.start();  
         }
     }
 
-    /**
-     * Handle a single client connection.  Returns when client disconnects.
-     * @param socket socket where the client is connected
-     * @throws IOException if connection has an error or terminates unexpectedly
-     */
-    private void handleConnection(Socket socket) throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
-        try {
-            for (String line =in.readLine(); line!=null; line=in.readLine()) {
-                String output = handleRequest(line);
-                if(output != null) {
-                    out.println(output);
-                }
-            }
-        } finally {        
-            out.close();
-            in.close();
-        }
-    }
-
-    /**
-     * handler for client input
-     * 
-     * make requested mutations on game state if applicable, then return 
-     * appropriate message to the user.
-     * 
-     * @param input
-     * @return
-     */
-    private static String handleRequest(String input) {
-        String regex = "(look)|(dig \\d+ \\d+)|(flag \\d+ \\d+)|" +
-                "(deflag \\d+ \\d+)|(help)|(bye)";
-        if(!input.matches(regex)) {
-            //invalid input
-            return null;
-        }
-        String[] tokens = input.split(" ");
-        if (tokens[0].equals("look")) {
-            // 'look' request
-            //TODO Question 5
-        } else if (tokens[0].equals("help")) {
-            // 'help' request
-            //TODO Question 5
-        } else if (tokens[0].equals("bye")) {
-            // 'bye' request
-            //TODO Question 5
-        } else {
-            int x = Integer.parseInt(tokens[1]);
-            int y = Integer.parseInt(tokens[2]);
-            if (tokens[0].equals("dig")) {
-                // 'dig x y' request
-                //TODO Question 5
-            } else if (tokens[0].equals("flag")) {
-                // 'flag x y' request
-                //TODO Question 5
-            } else if (tokens[0].equals("deflag")) {
-                // 'deflag x y' request
-                //TODO Question 5
-            }
-        }
-        // Should never get here--make sure to return in each of the valid cases above.
-        throw new UnsupportedOperationException();
-    }
+    // handleConnection & handleRequest are moved to @MinesweeperServerThread.java
+    
 
     /**
      * Start a MinesweeperServer running on the default port (4444).
@@ -111,7 +81,7 @@ public class MinesweeperServer {
      * Usage: MinesweeperServer [DEBUG [(-s SIZE | -f FILE)]]
      * 
      * The DEBUG argument should be either 'true' or 'false'. The server should disconnect a client
-     * after a BOOM message if and only if the DEBUG flag is set to 'false'.
+     * after a BOOM message if and only if the DEBUG flag is set to true.
      * 
      * SIZE is an optional integer argument specifying that a random board of size SIZE*SIZE should
      * be generated. E.g. "MinesweeperServer false -s 15" starts the server initialized with a
@@ -132,7 +102,7 @@ public class MinesweeperServer {
      * NEWLINE :== "\n" 
      * 
      * If neither FILE nor SIZE is given, generate a random board of size 10x10. If no arguments are
-     * specified, do the same and additionally assume DEBUG is 'false'. FILE and SIZE may not be
+     * specified, do the same and additionally assume DEBUG is false. FILE and SIZE may not be
      * specified simultaneously, and if one is specified, DEBUG must also be specified.
      * 
      * The system property minesweeper.customport may be used to specify a listening port other than
@@ -142,7 +112,7 @@ public class MinesweeperServer {
         // We parse the command-line arguments for you. Do not change this method.
         boolean debug = false;
         File file = null;
-        Integer size = 10; // Default size.
+        Integer size = 10; // Default board size.
         try {
             if (args.length != 0 && args.length != 1 && args.length != 3)
               throw new IllegalArgumentException();
@@ -179,11 +149,11 @@ public class MinesweeperServer {
             System.err.println("usage: MinesweeperServer DEBUG [(-s SIZE | -f FILE)]");
             return;
         }
-        // Allow the autograder to change the port number programmatically.
+        // Allow the change of the port number.
         final int port;
         String portProp = System.getProperty("minesweeper.customport");
         if (portProp == null) {
-            port = 4444; // Default port; do not change.
+            port = 4444; // Default port.
         } else {
             port = Integer.parseInt(portProp);
         }
@@ -194,12 +164,13 @@ public class MinesweeperServer {
         }
     }
 
+
     /**
      * Start a MinesweeperServer running on the specified port, with either a random new board or a
      * board loaded from a file. Either the file or the size argument must be null, but not both.
      * 
      * @param debug The server should disconnect a client after a BOOM message if and only if this
-     *        argument is false.
+     *        argument is true.
      * @param size If this argument is not null, start with a random board of size size * size.
      * @param file If this argument is not null, start with a board loaded from the specified file,
      *        according to the input file format defined in the JavaDoc for main().
@@ -208,8 +179,20 @@ public class MinesweeperServer {
     public static void runMinesweeperServer(boolean debug, File file, Integer size, int port)
             throws IOException
     {
-        // TODO: Continue your implementation here.
-        MinesweeperServer server = new MinesweeperServer(port, debug);
+
+        Board board=null;
+        
+        // sanity check: either file or size should be null!
+        if (file!=null){
+            String destination=file.getPath(); 
+            board=new Board(destination);
+        }else if(size!=null){
+            board=new Board(size);
+        }
+        else{// generate random 10-by-10 board
+            board=new Board(10);
+        }
+        MinesweeperServer server = new MinesweeperServer(port, debug, board);
         server.serve();
     }
 }
