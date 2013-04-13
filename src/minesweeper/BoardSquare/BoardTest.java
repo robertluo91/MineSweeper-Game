@@ -26,7 +26,7 @@ public class BoardTest {
 
     @Test
     public void testgoodBoard() {
-        Board board = new Board("src/minesweeper/server/goodBoard.txt");
+        Board board = new Board("src/minesweeper/server/goodBoardtest1.txt");
         String expected = "- - - - -\n- - - - -\n- - - - -\n- - - - -\n- - - - -\n";
         assertEquals(5, board.size());
         assertEquals(expected, board.toString());
@@ -52,7 +52,7 @@ public class BoardTest {
     @Test(expected = Exception.class)
     public void testBadBoard1() throws Exception {
     	// expected size error
-        new Board("src/minesweeper/server/badBoard1.txt");
+        new Board("src/minesweeper/server/badBoardtest1.txt");
     }
     
     
@@ -60,7 +60,7 @@ public class BoardTest {
     @Test(expected = Exception.class)
     public void testBadBoard2() throws Exception {
     	// board file incorrectly contains a "2"
-        new Board("src/minesweeper/server/badBoard2.txt");
+        new Board("src/minesweeper/server/badBoardtest2.txt");
     }
     
     @Test
@@ -83,7 +83,7 @@ public class BoardTest {
 
     @Test
     public void testNonRecursiveDig() {
-    	Board board = new Board("src/minesweeper/server/goodBoard.txt");
+    	Board board = new Board("src/minesweeper/server/goodBoardtest1.txt");
         board.dig(0, 2);
         String expected = "- - 2 - -\n- - - - -\n- - - - -\n- - - - -\n- - - - -\n";
         assertEquals(expected, board.toString());
@@ -101,7 +101,7 @@ public class BoardTest {
 
     @Test
     public void testBoomMessage() {
-    	Board board = new Board("src/minesweeper/server/goodBoard.txt");
+    	Board board = new Board("src/minesweeper/server/goodBoardtest1.txt");
         assertEquals(boomException.message, board.dig(0, 1));
         String expected = "- 2 1 - -\n- - - - -\n- - - - -\n- - - - -\n- - - - -\n";
         assertEquals(expected, board.dig(0, 2));
