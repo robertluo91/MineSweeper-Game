@@ -104,8 +104,8 @@ public class MinesweeperServerThread extends Thread {
         } else if (tokens[0].equals("bye")) {
             throw new closureException();
         } else {
-            int x = Integer.parseInt(tokens[1]);
-            int y = Integer.parseInt(tokens[2]);
+            int y = Integer.parseInt(tokens[1]);
+            int x = Integer.parseInt(tokens[2]);
             if (tokens[0].equals("dig")) {
                 return board.dig(x, y);
             } else if (tokens[0].equals("flag")) {

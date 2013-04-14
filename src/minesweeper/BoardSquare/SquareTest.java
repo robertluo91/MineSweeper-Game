@@ -34,7 +34,7 @@ public class SquareTest {
     
       
     @Test
-    public void FlagAndDeflag(){
+    public void FlagDeflag(){
         Square onesquare = new Square(false);
         onesquare.flag();
         assertEquals("F",onesquare.toString());
