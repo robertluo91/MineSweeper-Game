@@ -133,7 +133,7 @@ public class Board {
                         	if (diffx == 0 && diffy == 0){
                         		// it's the same square as the dug square, don't do anything
                         	}else{
-                        		squares[x][y].addAdjacent(squares[xcurrent][ycurrent]);
+                        		squares[x][y].addAdjacentbombs(squares[xcurrent][ycurrent]);
                         	}
                             
                         }
@@ -159,7 +159,9 @@ public class Board {
             }
 
         }
-        // if there is no BOOM! message, return board message
+        else if (x < 0 || y<0){
+        	return toString();
+        }
         return toString();
     }
 
@@ -168,7 +170,6 @@ public class Board {
         if (x >= 0 && y >= 0 && x < size && y < size) {
             squares[y][x].flag();
         }
-        // return board message
         return toString();
     }
 
@@ -178,7 +179,6 @@ public class Board {
             squares[y][x].deflag();
 
         }
-        // return board message
         return toString();
 
     }
@@ -212,7 +212,7 @@ public class Board {
     }
 
     /**
-     * (for test only! not part of the implementation code)
+     * only for test, not a part of the solution implementation
      * 
      * @return string representation of the actual bomb state of a mine field
      * a state string could either by 'B' (i.e., bomb) or 'Integer' (number of neighboring bombs)
