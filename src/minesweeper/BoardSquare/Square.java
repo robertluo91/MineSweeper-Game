@@ -14,7 +14,7 @@ import java.util.List;
 public class Square {
 	private State state;
 	private boolean hasBomb;
-	private List<Square> proximal = new ArrayList<Square>();
+	private List<Square> neighbors = new ArrayList<Square>();
 	private int numBomb;
 
 	private static enum State {
@@ -56,14 +56,14 @@ public class Square {
 			state = State.dug;
 			if (hasBomb) {
 				hasBomb = false;
-				for (Square sq : proximal) {
+				for (Square sq : neighbors) {
 					sq.decreaseBombs();
 				}
 				badState = true;
 
 			}
 			else if (numBomb == 0) {
-				for (Square sq : proximal) {
+				for (Square sq : neighbors) {
 					// dig surrounding squares recursively
 					sq.dig();
 				}
@@ -88,7 +88,7 @@ public class Square {
 
 	// add a new square to the adjacency list of the square currently being explored
 	public synchronized void addAdjacentbombs(Square square) {
-		proximal.add(square);
+		neighbors.add(square);
 		if (square.isBomb()) {
 			numBomb++;
 		}

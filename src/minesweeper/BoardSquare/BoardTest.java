@@ -30,16 +30,16 @@ public class BoardTest {
         String expected = "- - - - -\n- - - - -\n- - - - -\n- - - - -\n- - - - -\n";
         assertEquals(5, board.size());
         assertEquals(expected, board.toString());
-        String expected1 = "2 B 2 2 B\nB 3 B 3 2\n1 2 3 B 2\n0 0 2 B 2\n0 0 1 1 1\n";
+        String expected1 = "1 B 2 2 B\n1 1 3 B 3\n0 0 3 B 3\n0 0 2 B 2\n0 0 1 1 1\n";
         assertEquals(expected1, board.bombDistribution());
         board.dig(0, 0);
-        String expected2 = "2 - - - -\n- - - - -\n- - - - -\n- - - - -\n- - - - -\n";
+        String expected2 = "1 - - - -\n- - - - -\n- - - - -\n- - - - -\n- - - - -\n";
         assertEquals(expected2, board.toString());
         board.dig(3, 4);
-        String expected3 = "2 - - - -\n- - - - -\n- - - - -\n- - - - -\n- - - 1 -\n";
+        String expected3 = "1 - - - -\n- - - - -\n- - - - -\n- - - - -\n- - - 1 -\n";
         assertEquals(expected3, board.toString());
         board.dig(2, 4);
-        String expected4 = "2 - - - -\n- - - - -\n- - - - -\n- - - - -\n- - 1 1 -\n";
+        String expected4 = "1 - - - -\n- - - - -\n- - - - -\n- - - - -\n- - 1 1 -\n";
         assertEquals(expected4, board.toString());
 
     }
@@ -87,15 +87,15 @@ public class BoardTest {
     }
 
     @Test
-    public void testNonRecursiveDig() {
+    public void testDigNoRecursive() {
     	Board board = new Board("src/minesweeper/server/goodBoardtest1.txt");
-        board.dig(0, 2);
-        String expected = "- - - - -\n- - - - -\n1 - - - -\n- - - - -\n- - - - -\n";
+        board.dig(2, 0);
+        String expected = "- - 2 - -\n- - - - -\n- - - - -\n- - - - -\n- - - - -\n";
         assertEquals(expected, board.toString());
     }
 
     @Test
-    public void testRecursiveDig() {
+    public void testDigRecursive() {
         boolean[][] input = { { true, true, false }, { true, false, false },
                 { false, false, false } };
         Board board = new Board(input);
@@ -108,7 +108,7 @@ public class BoardTest {
     public void testBoomMessage() {
     	Board board = new Board("src/minesweeper/server/goodBoardtest1.txt");
         assertEquals(boomException.message, board.dig(1, 0));
-        String expected = "- 2 1 - -\n- - - - -\n- - - - -\n- - - - -\n- - - - -\n";
+        String expected = "-   1 - -\n- - - - -\n- - - - -\n- - - - -\n- - - - -\n";
         assertEquals(expected, board.dig(2, 0));
 
     }
