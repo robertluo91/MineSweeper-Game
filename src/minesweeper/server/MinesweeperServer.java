@@ -14,9 +14,8 @@ import minesweeper.BoardSquare.Board;
  * 1. main thread accepting new connection.
  * 2. one thread (MinesweeperSeverThread) per connected client, handling that client only.
  * 
- * The serverSocket object is confined to the main thread. 
- * The Socket object for a client is confined to the client's thread;
- * the main thread loses its reference to the object right after starting the client thread.
+ * The serverSocket object is confined to the main thread. The Socket object for a client is limited to the 
+ * client's thread. the main thread loses its reference to the object right after starting the client thread.
  * 
  * All fields are private without representation exposure.
  * The references to 'board' and 'debug' are locked by "private final" condition
@@ -27,9 +26,8 @@ import minesweeper.BoardSquare.Board;
 public class MinesweeperServer {
 	
     private ServerSocket serverSocket;
-    private int numPlayers;
+    private int Playernum;
     private final Board board;
-    /** False if the serve needs to disconnect a client after a BOOM message. */
     private final boolean debug;
 
     /**
@@ -39,20 +37,17 @@ public class MinesweeperServer {
     public MinesweeperServer(int port, boolean debug, Board board) throws IOException {
         serverSocket = new ServerSocket(port);
         this.debug = debug;
-        this.numPlayers = 0; 
+        this.Playernum = 0; 
         this.board = board;
-    }
-    
+    }   
     public synchronized void increaseNumPlayers(){
-        this.numPlayers++;
-    }
-    
+        this.Playernum++;
+    }    
     public synchronized void decreaseNumPlayers(){
-        this.numPlayers--;
-    }
-    
+        this.Playernum--;
+    }    
     public synchronized int getNumPlayers() {
-        return numPlayers;
+        return Playernum;
     } 
 
     /**

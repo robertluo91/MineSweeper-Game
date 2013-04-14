@@ -19,7 +19,6 @@ public class Square {
 
 	private static enum State {
 		// three states defined according to problem set instructions
-		// http://www.mit.edu/~6.005/fa12/psets/ps3/
 		untouched, flagged, dug
 	}
 
@@ -105,7 +104,7 @@ public class Square {
 			return "-";
 		case dug: {
 			if (numBomb == 0) {
-				return " ";
+				return "hello";
 			} else {
 				return Integer.toString(numBomb);
 			}
