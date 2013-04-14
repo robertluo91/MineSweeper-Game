@@ -104,7 +104,7 @@ public class Square {
 			return "-";
 		case dug: {
 			if (numBomb == 0) {
-				return "hello";
+				return " ";
 			} else {
 				return Integer.toString(numBomb);
 			}
