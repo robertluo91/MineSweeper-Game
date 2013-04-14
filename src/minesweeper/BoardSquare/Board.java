@@ -41,7 +41,7 @@ public class Board {
             }
         }
 
-        generateNeighborList();
+        NeighborListgen();
 
     }
 
@@ -50,15 +50,14 @@ public class Board {
         final double bombProbability = 0.25;
         this.size = size;
         this.squares = new Square[size][size];
-        // randomly generate Board
-        Random randomBomb = new Random();
+        Random randomBomb = new Random();         // randomly generate Board
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
                 squares[x][y] = new Square(randomBomb.nextDouble() < bombProbability);
             }
         }
 
-        generateNeighborList();
+        NeighborListgen();
 
     }
 
@@ -83,7 +82,7 @@ public class Board {
                     throw new FileException();
                 }
                 for (int y = 0; y < size; y++) {
-                	// input file must contain zero's and one's only
+                	// input file must contain 0's and 1's only
                 	if (!tokens[y].equals("1") && !tokens[y].equals("0")){
                 		throw new FileException();
                 	}
@@ -109,11 +108,11 @@ public class Board {
                 input.close();
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new RuntimeException("game cannot close properly!");
+                throw new RuntimeException("game can't properly close!");
             }
         }
 
-        generateNeighborList();
+        NeighborListgen();
 
     }
 
@@ -121,7 +120,7 @@ public class Board {
      *  when this method is called by a square instance, a list containing all of its 
      *  neighboring squares (maximal = 8) is generated
      */
-    private synchronized void generateNeighborList() {
+    private synchronized void NeighborListgen() {
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
                 for (int diffx = -1; diffx <= 1; diffx++) { // diffx = -1, 0, or 1
@@ -200,9 +199,9 @@ public class Board {
 
     
     /**
-     * (for test only! not part of the implementation code)
+     * for test only! not part of the implementation code
      * 
-     * @return int size n of an n-by-n mine field
+     * @return int size n of a mine field
      */
     public int size() {
         return size;
@@ -214,7 +213,7 @@ public class Board {
      * @return string representation of the actual bomb state of a mine field
      * a state string could either by 'B' (i.e., bomb) or 'Integer' (number of neighboring bombs)
      */
-    public synchronized String bombDistribution() {
+    public synchronized String bombDistri() {
         StringBuilder output = new StringBuilder();
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * 
  * The Square class is thread safe. 
- * Fields objects (state, hasBomb, proximal, numBomb) are all private;
+ * Fields objects (state, hasBomb, proximal, numBomb) are all private to decrease rep exposure;
  * All the mutator methods are synchronized
  * 
  */

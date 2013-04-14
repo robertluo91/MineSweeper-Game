@@ -31,7 +31,7 @@ public class BoardTest {
         assertEquals(5, board.size());
         assertEquals(expected, board.toString());
         String expected1 = "1 B 2 2 B\n1 1 3 B 3\n0 0 3 B 3\n0 0 2 B 2\n0 0 1 1 1\n";
-        assertEquals(expected1, board.bombDistribution());
+        assertEquals(expected1, board.bombDistri());
         board.dig(0, 0);
         String expected2 = "1 - - - -\n- - - - -\n- - - - -\n- - - - -\n- - - - -\n";
         assertEquals(expected2, board.toString());
@@ -50,7 +50,7 @@ public class BoardTest {
                 { false, false, false } };
         Board b = new Board(input);
         assertEquals("- - -\n- - -\n- - -\n", b.toString());
-        assertEquals("2 B 2\nB 3 B\n1 2 1\n", b.bombDistribution());
+        assertEquals("2 B 2\nB 3 B\n1 2 1\n", b.bombDistri());
 
     }
 
