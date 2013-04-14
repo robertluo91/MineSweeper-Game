@@ -153,7 +153,7 @@ public class Board {
     public String dig(int x, int y) {
         if (x >= 0 && y >= 0 && x < size && y < size) {
             try {
-                squares[x][y].dig();
+                squares[y][x].dig();
             } catch (boomException b) {
                 return b.message();
             }
@@ -166,7 +166,7 @@ public class Board {
     public String flag(int x, int y) {
 
         if (x >= 0 && y >= 0 && x < size && y < size) {
-            squares[x][y].flag();
+            squares[y][x].flag();
         }
         // return board message
         return toString();
@@ -175,7 +175,7 @@ public class Board {
     public String deflag(int x, int y) {
 
         if (x >= 0 && y >= 0 && x < size && y < size) {
-            squares[x][y].deflag();
+            squares[y][x].deflag();
 
         }
         // return board message

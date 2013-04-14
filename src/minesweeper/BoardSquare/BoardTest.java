@@ -35,12 +35,17 @@ public class BoardTest {
         board.dig(0, 0);
         String expected2 = "2 - - - -\n- - - - -\n- - - - -\n- - - - -\n- - - - -\n";
         assertEquals(expected2, board.toString());
+        board.dig(3, 4);
+        String expected3 = "2 - - - -\n- - - - -\n- - - - -\n- - - - -\n- - - 1 -\n";
+        assertEquals(expected3, board.toString());
+        board.dig(2, 4);
+        String expected4 = "2 - - - -\n- - - - -\n- - - - -\n- - - - -\n- - 1 1 -\n";
+        assertEquals(expected4, board.toString());
 
     }
 
     @Test
     public void testBooleanConstructor() {
-    	// 3 by 3
         boolean[][] input = { { false, true, false }, { true, false, true },
                 { false, false, false } };
         Board b = new Board(input);
@@ -85,7 +90,7 @@ public class BoardTest {
     public void testNonRecursiveDig() {
     	Board board = new Board("src/minesweeper/server/goodBoardtest1.txt");
         board.dig(0, 2);
-        String expected = "- - 2 - -\n- - - - -\n- - - - -\n- - - - -\n- - - - -\n";
+        String expected = "- - - - -\n- - - - -\n1 - - - -\n- - - - -\n- - - - -\n";
         assertEquals(expected, board.toString());
     }
 
@@ -102,9 +107,9 @@ public class BoardTest {
     @Test
     public void testBoomMessage() {
     	Board board = new Board("src/minesweeper/server/goodBoardtest1.txt");
-        assertEquals(boomException.message, board.dig(0, 1));
+        assertEquals(boomException.message, board.dig(1, 0));
         String expected = "- 2 1 - -\n- - - - -\n- - - - -\n- - - - -\n- - - - -\n";
-        assertEquals(expected, board.dig(0, 2));
+        assertEquals(expected, board.dig(2, 0));
 
     }
 
