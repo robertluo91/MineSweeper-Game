@@ -159,9 +159,6 @@ public class Board {
             }
 
         }
-        else if (x < 0 || y<0){
-        	return toString();
-        }
         return toString();
     }
 

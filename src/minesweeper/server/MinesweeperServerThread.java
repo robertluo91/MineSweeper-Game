@@ -80,14 +80,16 @@ public class MinesweeperServerThread extends Thread {
      * @throws closureException 
      */
     private String handleRequest(String input) throws closureException{
-        String regex = "(look)|(dig \\d+ \\d+)|(flag \\d+ \\d+)|" +
-                "(deflag \\d+ \\d+)|(help)|(bye)|(x)";
+        String regex = "(look)|(dig -?\\d+ -?\\d+)|(flag -?\\d+ -?\\d+)|" +
+                "(deflag -?\\d+ -?\\d+)|(help)|(bye)|(x)";
         if(!input.matches(regex)) {        
-            return null;//invalid input type
+            return null;//invalid string type
         }
         
         String[] tokens = input.split(" ");
         System.out.println(input);
+   
+        
         if (tokens[0].equals("look")) {
             return board.toString();
         } else if (tokens[0].equals("help")) {
@@ -107,11 +109,20 @@ public class MinesweeperServerThread extends Thread {
             int x = Integer.parseInt(tokens[1]);
             int y = Integer.parseInt(tokens[2]);
             if (tokens[0].equals("dig")) {
-                return board.dig(x, y);
+            	if (x<0 || y<0){
+                	return board.toString();
+                }else {
+                return board.dig(x, y);}
             } else if (tokens[0].equals("flag")) {
-                return board.flag(x, y);
+            	if (x<0 || y<0){
+                	return board.toString();
+                }else {
+                return board.flag(x, y);}
             } else if (tokens[0].equals("deflag")) {
-                return board.deflag(x, y);
+            	if (x<0 || y<0){
+                	return board.toString();
+                }else {
+                return board.deflag(x, y);}
             }
         }
         //throw exception if the program gets to this step
