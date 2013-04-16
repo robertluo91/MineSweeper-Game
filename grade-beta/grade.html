@@ -1,0 +1,278 @@
+
+<html>
+  <style TYPE="text/css">
+     body {
+       background: white;
+       color: #383838;
+       font-family:"Lucida Grande";
+     }
+     div.rawOutput {
+       border: .1em dotted #900;
+     }
+     div.content {
+       width: 800px
+     }
+     div.testResult {
+       text-align: center;
+       font-weight: bold;
+     }
+     div.points {
+       text-align: center;
+       font-weight: bold;
+     }
+     div.testName {
+       font-weight: bold;
+     }
+     p {
+       font-weight: bold;
+     }
+     td {
+     }
+     pre {
+       font-size: 80%;
+       margin-left: 30px;
+     }
+     hr {
+       background-color: #808080
+     }
+  </style>
+  <body>
+    <div class="content">
+    <div class="filler" style="height: 20px"></div>
+      <h2><div><p>Grade: 56 / 100</p><div></h2>
+      
+<br><p>running hidden tests</p>
+<div class="rawOutput"><pre>Buildfile: /Users/saqib/ps3grading/ps3beta2slackrest/yluo15/build.xml
+
+test-clean:
+
+compile-student:
+    [mkdir] Created dir: /Users/saqib/ps3grading/ps3beta2slackrest/yluo15/bin
+    [javac] Compiling 9 source files to /Users/saqib/ps3grading/ps3beta2slackrest/yluo15/bin
+
+compile-empty:
+    [mkdir] Created dir: /Users/saqib/ps3grading/ps3beta2slackrest/yluo15/bin-empty
+    [javac] Compiling 1 source file to /Users/saqib/ps3grading/ps3beta2slackrest/yluo15/bin-empty
+
+compile-hidden:
+    [mkdir] Created dir: /Users/saqib/ps3grading/ps3beta2slackrest/yluo15/bin-tests
+    [javac] Compiling 24 source files to /Users/saqib/ps3grading/ps3beta2slackrest/yluo15/bin-tests
+    [mkdir] Created dir: /Users/saqib/ps3grading/ps3beta2slackrest/yluo15/bin-
+tests/autograder/resources
+     [copy] Copying 6 files to /Users/saqib/ps3grading/ps3beta2slackrest/yluo15/bin-
+tests/autograder/resources
+
+autograder:
+    [junit] Testsuite: autograder.BlankBoardFileTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.029 sec
+    [junit] ------------- Standard Output ---------------
+    [junit] look
+    [junit] ------------- ---------------- ---------------
+    [junit]
+    [junit] Testcase: testBlankBoardFile took 0.019 sec
+    [junit] Testsuite: autograder.BlankBoardSizeTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.026 sec
+    [junit] ------------- Standard Output ---------------
+    [junit] look
+    [junit] ------------- ---------------- ---------------
+    [junit]
+    [junit] Testcase: testBlankBoardSize took 0.016 sec
+    [junit] Testsuite: autograder.BlankBoardTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.024 sec
+    [junit] ------------- Standard Output ---------------
+    [junit] look
+    [junit] ------------- ---------------- ---------------
+    [junit]
+    [junit] Testcase: testBlankBoard took 0.016 sec
+    [junit] Testsuite: autograder.BoomDisconnectTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.329 sec
+    [junit] ------------- Standard Output ---------------
+    [junit] dig 1 1
+    [junit] ------------- ---------------- ---------------
+    [junit]
+    [junit] Testcase: testBoomDisconnect took 0.319 sec
+    [junit] Testsuite: autograder.BoomTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.028 sec
+    [junit] ------------- Standard Output ---------------
+    [junit] dig 1 1
+    [junit] ------------- ---------------- ---------------
+    [junit]
+    [junit] Testcase: testBoom took 0.019 sec
+    [junit] Testsuite: autograder.ByeTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.105 sec
+    [junit] ------------- Standard Output ---------------
+    [junit] bye
+    [junit] ------------- ---------------- ---------------
+    [junit]
+    [junit] Testcase: testBye took 0.07 sec
+    [junit] Testsuite: autograder.DigTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.112 sec
+    [junit] ------------- Standard Output ---------------
+    [junit] dig 0 0
+    [junit] ------------- ---------------- ---------------
+    [junit]
+    [junit] Testcase: testBasicDig took 0.054 sec
+    [junit] Testsuite: autograder.ExplodeTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.111 sec
+    [junit] ------------- Standard Output ---------------
+    [junit] dig 1 1
+    [junit] look
+    [junit] ------------- ---------------- ---------------
+    [junit]
+    [junit] Testcase: testExplode took 0.073 sec
+    [junit] Testsuite: autograder.FlagAndDeFlagTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.115 sec
+    [junit] ------------- Standard Output ---------------
+    [junit] flag 2 2
+    [junit] deflag 2 2
+    [junit] ------------- ---------------- ---------------
+    [junit]
+    [junit] Testcase: testFlagThenDeflag took 0.058 sec
+    [junit] Testsuite: autograder.HelloTestMultiTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.185 sec
+    [junit]
+    [junit] Testcase: testHelloMultiClients took 0.146 sec
+    [junit] Testsuite: autograder.HelloTestSingleTest
+    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.075 sec
+    [junit]
+    [junit] Testcase: testHello took 0.034 sec
+    [junit] Testsuite: autograder.MinesweeperSystemTest
+[autograder] timeout - user: ../ps3beta2slackrest/yluo15 pid: 29100 time elapsed: 561s cmd: 'ant
+-Declipse.home="$ECLIPSE_HOME" autograder'
+</pre></div>
+<br><table width="800px">
+<tr>
+<td style="width:50px"><div class="points">3/3</div></td>
+<td style="width:50px"><div class="testResult">PASS</div></td>
+<td style="width:700px"><div class="testName">testBlankBoardFile</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">3/3</div></td>
+<td style="width:50px"><div class="testResult">PASS</div></td>
+<td style="width:700px"><div class="testName">testBlankBoardSize</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">3/3</div></td>
+<td style="width:50px"><div class="testResult">PASS</div></td>
+<td style="width:700px"><div class="testName">testBlankBoard</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">5/5</div></td>
+<td style="width:50px"><div class="testResult">PASS</div></td>
+<td style="width:700px"><div class="testName">testBoomDisconnect</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">5/5</div></td>
+<td style="width:50px"><div class="testResult">PASS</div></td>
+<td style="width:700px"><div class="testName">testBoom</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">5/5</div></td>
+<td style="width:50px"><div class="testResult">PASS</div></td>
+<td style="width:700px"><div class="testName">testBye</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">5/5</div></td>
+<td style="width:50px"><div class="testResult">PASS</div></td>
+<td style="width:700px"><div class="testName">testBasicDig</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">7/7</div></td>
+<td style="width:50px"><div class="testResult">PASS</div></td>
+<td style="width:700px"><div class="testName">testExplode</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">6/6</div></td>
+<td style="width:50px"><div class="testResult">PASS</div></td>
+<td style="width:700px"><div class="testName">testFlagThenDeflag</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">7/7</div></td>
+<td style="width:50px"><div class="testResult">PASS</div></td>
+<td style="width:700px"><div class="testName">testHelloMultiClients</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">7/7</div></td>
+<td style="width:50px"><div class="testResult">PASS</div></td>
+<td style="width:700px"><div class="testName">testHello</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">0/2</div></td>
+<td style="width:50px"><div class="testResult">FAIL</div></td>
+<td style="width:700px"><div class="testName">testDigFlagged</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">0/2</div></td>
+<td style="width:50px"><div class="testResult">FAIL</div></td>
+<td style="width:700px"><div class="testName">testOffDiagDig</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">0/2</div></td>
+<td style="width:50px"><div class="testResult">FAIL</div></td>
+<td style="width:700px"><div class="testName">testOffDiagFlag</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">0/2</div></td>
+<td style="width:50px"><div class="testResult">FAIL</div></td>
+<td style="width:700px"><div class="testName">publishedTest</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">0/7</div></td>
+<td style="width:50px"><div class="testResult">FAIL</div></td>
+<td style="width:700px"><div class="testName">testRecursiveDig</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">0/3</div></td>
+<td style="width:50px"><div class="testResult">FAIL</div></td>
+<td style="width:700px"><div class="testName">testRepeatDigByDifferentUsers</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">0/2</div></td>
+<td style="width:50px"><div class="testResult">FAIL</div></td>
+<td style="width:700px"><div class="testName">testRepeatDig</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">0/2</div></td>
+<td style="width:50px"><div class="testResult">FAIL</div></td>
+<td style="width:700px"><div class="testName">testRepeatFlag</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">0/7</div></td>
+<td style="width:50px"><div class="testResult">FAIL</div></td>
+<td style="width:700px"><div class="testName">testServerCount</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">0/7</div></td>
+<td style="width:50px"><div class="testResult">FAIL</div></td>
+<td style="width:700px"><div class="testName">testSharedMemory</div></td>
+</tr>
+
+<tr>
+<td style="width:50px"><div class="points">0/8</div></td>
+<td style="width:50px"><div class="testResult">FAIL</div></td>
+<td style="width:700px"><div class="testName">systemTest</div></td>
+</tr></table>
+<br><hr style="background-color: #808080">
+    </div>
+  </body>
+</html>

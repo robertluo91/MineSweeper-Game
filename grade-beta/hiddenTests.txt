@@ -1,0 +1,34 @@
+testName: descritpions 
+-----------------------------------------------------------------------
+testBlankBoardFile: Loading board from file.
+testBlankBoardSize: Randomly generating board of specified size.
+testBlankBoard: Randomly generating board of default size.
+
+testBoomDisconnect: Dig bomb, expect server disconnect.
+testBoom: Dig bomb, expect BOOM msg.
+testBye: Send BYE, expect server disconnect.
+
+testBasicDig: Test DIG functionality.
+testRecursiveDig: Test recursive DIG functionality.
+
+testExplode: Dig a bomb, expect it to subsequently be gone. uses debug mode. 
+
+testFlagThenDeflag: Basic flag/deflag.
+
+testHelloMultiClients: Connect on multiple clients and get a message back.
+testHello: Connect on one client and get a message back.
+
+testDigFlagged: DIG a flagged square, expect no change.
+
+testOffDiagDig: Check x/y coords by testing a dig operation on off-diagonal squares.
+testOffDiagFlag: Check x/y coords by testing a flag operation on off-diagonal squares.
+
+publishedTest: Run the published test used by didit.
+
+testRepeatDig: Check that repeated actions on same square do nothing.
+testRepeatFlag: Check that repeated actions on same square do nothing.
+
+testServerCount: Check server count in hello msg for multiple client connections. also tests if hello message matches the given hello message text. 
+testSharedMemory: Check that client B sees client A's changes.
+
+systemTest: Series of operations by multiple clients.
