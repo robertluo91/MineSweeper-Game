@@ -129,9 +129,8 @@ public class Board {
                         final int ycurrent = y + diffy;
                         if (xcurrent >= 0 && ycurrent >= 0 && xcurrent < size
                                 && ycurrent < size) {
-                        	if (diffx == 0 && diffy == 0){
-                        		// it's the same square as the dug square, don't do anything
-                        	}else{
+                        	if (!(diffx == 0 && diffy == 0)){
+                        		
                         		squares[x][y].addAdjacentbombs(squares[xcurrent][ycurrent]);
                         	}
                             
